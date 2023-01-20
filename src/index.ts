@@ -17,6 +17,7 @@ import { Plugin, unified } from "unified";
 import { visit } from "unist-util-visit";
 import { fileURLToPath } from "url";
 import uslug from "uslug";
+import { v4 as uuidv4 } from 'uuid';
 
 const info = (verbose: boolean) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -247,10 +248,7 @@ const allowedXhtml11Tags = [
 
 // UUID generation
 function uuid() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-  });
+  return uuidv4();
 }
 
 // Current directory

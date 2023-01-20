@@ -52,7 +52,8 @@
 		"rx-queue": "^1.0.5",
 		"unified": "^10.1.2",
 		"unist-util-visit": "^4.1.1",
-		"uslug": "^1.0.4"
+		"uslug": "^1.0.4",
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
 		"@tsconfig/node16": "^1.0.3",
@@ -63,6 +64,7 @@
 		"@types/mime": "^3.0.1",
 		"@types/node": "^18.11.17",
 		"@types/uslug": "^1.0.1",
+		"@types/uuid": "^9.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.46.1",
 		"@typescript-eslint/parser": "^5.46.1",
 		"ava": "^5.1.0",
