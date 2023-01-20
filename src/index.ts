@@ -17,7 +17,7 @@ import { Plugin, unified } from "unified";
 import { visit } from "unist-util-visit";
 import { fileURLToPath } from "url";
 import uslug from "uslug";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const info = (verbose: boolean) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -656,20 +656,29 @@ export class EPub {
     if (this.cover.slice(0, 4) === "http") {
       attach();
       const raxConfig: RetryConfig = this.getRetryConfig(this.cover);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const options: any = {
-        raxConfig,
-        timeout: 50000,
-        responseType: "arraybuffer",
-        httpsAgent: new https.Agent({
-          rejectUnauthorized: this.rejectUnauthorized,
-        }),
-        headers: { "User-Agent": this.userAgent },
-      };
-      const imageBuffer = await axios.get(this.cover, options);
-      const buffer = Buffer.from(imageBuffer.data, "base64");
-      writeFileSync(destPath, buffer);
-      this.info("[Success] cover image downloaded successfully!");
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const options: any = {
+          raxConfig,
+          timeout: 50000,
+          responseType: "arraybuffer",
+          httpsAgent: new https.Agent({
+            rejectUnauthorized: this.rejectUnauthorized,
+          }),
+          headers: { "User-Agent": this.userAgent },
+        };
+        const imageBuffer = await axios.get(this.cover, options);
+        const buffer = Buffer.from(imageBuffer.data, "base64");
+        writeFileSync(destPath, buffer);
+        this.info("[Success] cover image downloaded successfully!");
+      } catch (err) {
+        if ((err as AxiosError).response?.status === 404) {
+          this.info("[Download Skip] Cover not found", this.cover);
+          return;
+        }
+        this.info("[Download Error]", this.cover, err);
+        throw err;
+      }
     } else {
       const buffer = readFileSync(this.cover);
       writeFileSync(destPath, buffer);
