@@ -658,7 +658,8 @@ export class EPub {
     if (this.cover.slice(0, 4) === "http") {
       attach();
       const raxConfig: RetryConfig = this.getRetryConfig(this.cover);
-      const imageBuffer = await axios.get(this.cover, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const options: any = {
         raxConfig,
         timeout: 50000,
         responseType: "arraybuffer",
@@ -666,7 +667,8 @@ export class EPub {
           rejectUnauthorized: this.rejectUnauthorized,
         }),
         headers: { "User-Agent": this.userAgent },
-      });
+      };
+      const imageBuffer = await axios.get(this.cover, options);
       const buffer = Buffer.from(imageBuffer.data, "base64");
       writeFileSync(destPath, buffer);
       this.info("[Success] cover image downloaded successfully!");
@@ -695,7 +697,8 @@ export class EPub {
       }
       const raxConfig: RetryConfig = this.getRetryConfig(image.url);
       try {
-        const imageBuffer = await axios.get(image.url, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const options: any = {
           raxConfig,
           timeout: 50000,
           responseType: "arraybuffer",
@@ -703,7 +706,8 @@ export class EPub {
             rejectUnauthorized: this.rejectUnauthorized,
           }),
           headers: { "User-Agent": this.userAgent },
-        });
+        };
+        const imageBuffer = await axios.get(image.url, options);
         const buffer = Buffer.from(imageBuffer.data, "base64");
         writeFileSync(filename, buffer);
         this.info("[Download Success]", image.url);
