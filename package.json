@@ -51,7 +51,7 @@
 		"retry-axios": "^3.0.0",
 		"rx-queue": "^1.0.5",
 		"unified": "^10.1.2",
-		"unist-util-visit": "^4.1.2",
+		"unist-util-visit": "^5.0.0",
 		"uslug": "^1.0.4",
 		"uuid": "^9.0.0"
 	},
