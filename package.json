@@ -64,7 +64,7 @@
 		"@types/mime": "^3.0.1",
 		"@types/node": "^18.16.18",
 		"@types/uslug": "^1.0.1",
-		"@types/uuid": "^9.0.2",
+		"@types/uuid": "^11.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.60.1",
 		"@typescript-eslint/parser": "^5.60.1",
 		"ava": "^5.3.1",
