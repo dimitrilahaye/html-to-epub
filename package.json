@@ -53,7 +53,7 @@
 		"unified": "^10.1.2",
 		"unist-util-visit": "^4.1.2",
 		"uslug": "^1.0.4",
-		"uuid": "^9.0.0"
+		"uuid": "^14.0.0"
 	},
 	"devDependencies": {
 		"@tsconfig/node16": "^16.1.0",
